@@ -1,0 +1,23 @@
+[app]
+title = ScoreExactBot
+package.name = scorebot
+package.domain = org.kivy
+source.dir = app
+source.include_exts = py,png,jpg,kv,atlas
+version = 1.0
+requirements = python3,kivy,requests,numpy,scipy
+orientation = portrait
+fullscreen = 1
+android.permissions = INTERNET
+android.api = 30
+android.minapi = 21
+android.ndk = 23b
+android.archs = armeabi-v7a
+android.gradle_dependencies = 
+android.meta_data = 
+android.enable_multiprocess = False
+android.allow_backup = True
+android.supports_orientation = portrait
+presplash.filename = %(source.dir)s/icon.png
+icon.filename = %(source.dir)s/icon.png
+log_level = 2

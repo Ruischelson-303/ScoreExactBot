@@ -1,0 +1,42 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y zip unzip libgl1-mesa-dev libgles2-mesa-dev \
+            build-essential ccache git libncurses5 openjdk-8-jdk \
+            libffi-dev libssl-dev python3-pip
+          python3 -m pip install --upgrade Cython virtualenv
+
+      - name: Install buildozer
+        run: |
+          python3 -m pip install buildozer
+          buildozer init
+
+      - name: Build APK
+        run: |
+          cd app
+          buildozer -v android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: ScoreExactBot-APK
+          path: app/bin/*.apk
